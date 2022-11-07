@@ -24,15 +24,10 @@ router.get('/estudiantes/:id_estudiante', (req, res) =>{
     });
 });
 
-router.post('/estudiantes', (req, res)=>{
+router.post('/estudiantes/', (req, res)=>{
     const {id_estudiante, nombre, codigo, facultad, carrera} = req.body;
-    const query =  `SET @id_estudiante = ?;
-    SET @nombre = ?;
-    SET @codigo = ?;
-        SET @facultad = ?;
-        SET @carrera = ?;
-    CALL agregarActualizarEstudiante(@id_estudiante, @nombre, @codigo, @facultad, @carrera);`;
-    console.log(query)
+    const query =  `CALL agregarActualizarEstudiante(?, ?, ?, ?, ?);`;
+   
     mysqlConnection.query(query, [id_estudiante, nombre, codigo, facultad, carrera], (err, rows, fields) => {
         if(!err){
             res.json({status: 'Estudiantes guardados'});
