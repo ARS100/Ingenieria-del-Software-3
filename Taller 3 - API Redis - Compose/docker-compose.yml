@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  api:
+    image: node:10-alpine
+    working_dir: /Taller 3 - API Redis - Compose
+    volumes:
+      - ./:/Taller 3 - API Redis - Compose
+    ports:
+      - 8000:3000
+  
+  redis:
+    image: redis:5-alpine
