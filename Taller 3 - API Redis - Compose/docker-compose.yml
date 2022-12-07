@@ -1,6 +1,11 @@
 version: '3.5'
 
 services:
+  
+  node-app:
+    build: C:\Users\alero\OneDrive\Escritorio\UIS\9 NOVENO SEMESTRE\Ingenieria-del-Software-3\Taller 3 - API Redis - Compose\mysql-nodejs-rest-api
+    ports:
+      - 4001:8081
   api:
     image: node:10-alpine
     working_dir: /app
@@ -11,3 +16,8 @@ services:
     command: npm start
   redis:
     image: redis:5-alpine
+  redis-server: 
+    image: redis
+
+  
+  
