@@ -22,6 +22,8 @@ app.use(require('./rutas/cliente'));
 app.use(require('./rutas/usuario'));
 app.use(require('./rutas/reserva'));
 app.use(require('./rutas/habitacion'));
+app.use(require('./rutas/index'));
+
 // Iniciar el servidor
 app.listen(app.get('port'), () =>{
     console.log('Server en el puerto', app.get('port'));
