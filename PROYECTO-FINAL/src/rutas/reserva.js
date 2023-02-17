@@ -26,11 +26,7 @@ router.get('/reserva/:id_reserva', (req, res) =>{
 
 router.post('/reserva/', (req, res)=>{
     const {id_reserva, fecha} = req.body;
-    const query =  `
-    SET @id_reserva = ?;
-	SET @fecha = ?;
-
-    CALL agregarActualizarReserva(@id_reserva, @fecha);`;
+    const query =  ` CALL agregarActualizarReserva(@id_reserva, @fecha);`;
     mysqlConnection.query(query, [id_reserva, fecha], (err, rows, fields) => {
         if(!err){
             res.json({status: 'Reserva guardada'});
@@ -43,11 +39,7 @@ router.post('/reserva/', (req, res)=>{
 router.put('/reserva/:reserva', (req, res) => {
     const { fecha} = req.body;
     const { id_reserva } = req.params;
-    const query =  `
-    SET @id_reserva = ?;
-	SET @fecha = ?;
-    
-    CALL agregarActualizarReserva(@id_reserva, @fecha);`;
+    const query =  `CALL agregarActualizarReserva(@id_reserva, @fecha);`;
     mysqlConnection.query(query, [id_reserva, fecha], (err, rows, fields) => {
       if(!err) {
         res.json({status: 'Reserva actualizada'});

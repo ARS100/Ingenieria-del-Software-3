@@ -26,12 +26,7 @@ router.get('/usuario/:usuario', (req, res) =>{
 
 router.post('/usuario/', (req, res)=>{
     const {id_usuario, correo, contraseña} = req.body;
-    const query =  `
-    SET @id_usuario = ?;
-	SET @correo = ?;
-    SET @contraseña= ?;
-
-    CALL agregarActualizarUsuario(@id_usuario, @correo, @contraseña);`;
+    const query =  `CALL agregarActualizarUsuario(@id_usuario, @correo, @contraseña);`;
     mysqlConnection.query(query, [id_usuario, correo, contraseña], (err, rows, fields) => {
         if(!err){
             res.json({status: 'Usuario guardado'});
@@ -44,12 +39,7 @@ router.post('/usuario/', (req, res)=>{
 router.put('/usuario/:usuario', (req, res) => {
     const { correo, contraseña} = req.body;
     const { id_usuario } = req.params;
-    const query =  `
-    SET @id_usuario = ?;
-	SET @correo = ?;
-    SET @contraseña= ?;
-
-    CALL agregarActualizarUsuario(@id_usuario, @correo, @contraseña);`;
+    const query =  `CALL agregarActualizarUsuario(@id_usuario, @correo, @contraseña);`;
     mysqlConnection.query(query, [id_usuario, correo, contraseña], (err, rows, fields) => {
       if(!err) {
         res.json({status: 'Usuario actualizado'});

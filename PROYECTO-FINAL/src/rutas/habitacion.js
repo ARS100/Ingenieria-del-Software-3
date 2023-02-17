@@ -26,12 +26,7 @@ router.get('/habitacion/:id_habitacion', (req, res) =>{
 
 router.post('/habitacion/', (req, res)=>{
     const {id_habitacion, ubicacion, descripcion} = req.body;
-    const query =  `
-    SET @id_habitacion = ?;
-	SET @ubicacion = ?;
-    SET @descripcion= ?;
-
-    CALL agregarActualizarHabitacion(@id_habitacion, @ubicacion, @descripcion);`;
+    const query =  `CALL agregarActualizarHabitacion(@id_habitacion, @ubicacion, @descripcion);`;
     mysqlConnection.query(query, [id_habitacion, ubicacion, descripcion], (err, rows, fields) => {
         if(!err){
             res.json({status: 'Habitacion guardada'});
@@ -44,12 +39,7 @@ router.post('/habitacion/', (req, res)=>{
 router.put('/habitacion/:habitacion', (req, res) => {
     const { ubicacion, descripcion} = req.body;
     const { id_habitacion } = req.params;
-    const query =  `
-    SET @id_habitacion = ?;
-	SET @ubicacion = ?;
-    SET @descripcion= ?;
-
-    CALL agregarActualizarHabitacion(@id_habitacion, @ubicacion, @descripcion);`;
+    const query =  `CALL agregarActualizarHabitacion(@id_habitacion, @ubicacion, @descripcion);`;
     mysqlConnection.query(query, [id_habitacion, ubicacion, descripcion], (err, rows, fields) => {
       if(!err) {
         res.json({status: 'Habitacion actualizada'});

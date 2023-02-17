@@ -26,12 +26,7 @@ router.get('/administrador/:id_administrador', (req, res) =>{
 
 router.post('/administrador/', (req, res)=>{
     const {id_administrador, correo, contraseña} = req.body;
-    const query =  `
-    SET @id_administrador = ?;
-	SET @correo = ?;
-    SET @contraseña= ?;
-
-    CALL agregarActualizarAdministrador(@id_administrador, @correo, @contraseña);`;
+    const query =  `CALL agregarActualizarAdministrador(@id_administrador, @correo, @contraseña);`;
     mysqlConnection.query(query, [id_administrador, correo, contraseña], (err, rows, fields) => {
         if(!err){
             res.json({status: 'Administrador guardado'});
@@ -44,15 +39,10 @@ router.post('/administrador/', (req, res)=>{
 router.put('/administrador/:administrador', (req, res) => {
     const { correo, contraseña} = req.body;
     const { id_administrador } = req.params;
-    const query =  `
-    SET @id_administrador = ?;
-	SET @correo = ?;
-    SET @contraseña= ?;
-
-    CALL agregarActualizarAdministrador(@id_administrador, @correo, @contraseña);`;
+    const query =  `CALL agregarActualizarAdministrador(@id_administrador, @correo, @contraseña);`;
     mysqlConnection.query(query, [id_administrador, correo, contraseña], (err, rows, fields) => {
       if(!err) {
-        res.json({status: 'AQdministrador actualizado'});
+        res.json({status: 'Administrador actualizado'});
       } else {
         console.log(err);
       }

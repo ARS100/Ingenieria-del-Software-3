@@ -26,14 +26,7 @@ router.get('/cliente/:id_cliente', (req, res) =>{
 
 router.post('/cliente/', (req, res)=>{
     const {id_cliente, correo, contraseña, nombre, apellidos} = req.body;
-    const query =  `
-    SET @id_cliente = ?;
-	SET @correo = ?;
-    SET @contraseña= ?;
-    SET @nombre= ?;
-    SET @apellidos = ?;
-
-    CALL agregarActualizarCliente(@id_cliente, @correo, @contraseña, @nombre, @apellidos);`;
+    const query =  `CALL agregarActualizarCliente(@id_cliente, @correo, @contraseña, @nombre, @apellidos);`;
     mysqlConnection.query(query, [id_cliente, correo, contraseña, nombre, apellidos], (err, rows, fields) => {
         if(!err){
             res.json({status: 'Cliente guardado'});
@@ -46,14 +39,7 @@ router.post('/cliente/', (req, res)=>{
 router.put('/cliente/:cliente', (req, res) => {
     const { correo, contraseña, nombre, apellidos} = req.body;
     const { id_cliente } = req.params;
-    const query =  `
-    SET @id_cliente = ?;
-	SET @correo = ?;
-    SET @contraseña= ?;
-    SET @nombre = ?;
-    SET @apellidos = ?;
-
-    CALL agregarActualizarCliente(@id_cliente, @correo, @contraseña, @nombre, @apellidos);`;
+    const query =  ` CALL agregarActualizarCliente(@id_cliente, @correo, @contraseña, @nombre, @apellidos);`;
     mysqlConnection.query(query, [id_cliente, correo, contraseña, nombre, apellidos], (err, rows, fields) => {
       if(!err) {
         res.json({status: 'Cliente actualizado'});
